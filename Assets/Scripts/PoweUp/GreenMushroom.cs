@@ -14,6 +14,7 @@ public class GreenMushroom : PowerUp
             if (_characterValues._actualState != CharacterValues._state.medium)
             {
                 collision.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                _characterValues._actualState = CharacterValues._state.medium;
                 _characterValues.Points += _score;
             }
             else AlreadyHave();
@@ -23,7 +24,7 @@ public class GreenMushroom : PowerUp
     }
 
     public override void AlreadyHave()
-    {
+    { 
         _characterValues.Points += (_score * 2);
     }
 }

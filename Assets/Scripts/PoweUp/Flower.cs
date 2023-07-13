@@ -22,6 +22,8 @@ public class Flower : PowerUp
                 _characterValues.Points += _score;
             }
             else AlreadyHave();
+
+            Destroy(gameObject);
         }
     }
     public override void AlreadyHave()
