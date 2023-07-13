@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _powerUpFactory: {fileID: 5039081649186828859}
+  _color: {r: 0.5566038, g: 0.43423045, b: 0.04463333, a: 1}
 --- !u!61 &5039081649186828856
 BoxCollider2D:
   m_ObjectHideFlags: 0

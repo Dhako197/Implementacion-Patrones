@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,39 @@ public class CharacterValues : MonoBehaviour
 
     private bool _isInvulnerable = false;
 
-    public float Points { get => _points; set => _points = value; }
-    public float Coins { get => _coins; set => _coins = value; }
+    public event Action<float> OnPointsChanged;
+    public event Action<float> OnCoinsChanged;
+    public event Action<float> OnTimeChanged;
+
+    public float Points
+    {
+        get { return _points; }
+        set
+        {
+            _points = value;
+            OnPointsChanged.Invoke(_points);
+        }
+    }
+    public float Coins
+    {
+        get { return _coins;}
+        set
+        {
+            _coins = value;
+            OnCoinsChanged.Invoke(_coins);
+        }
+    }
+    public float time
+    {
+        get { return _time;}
+        set
+        {
+            _time = value;
+            OnTimeChanged?.Invoke(_time); 
+        }
+    }
     public float Lives { get => _lives; set => _lives = value; }
+    
   
 
     private void Start()
@@ -28,7 +59,11 @@ public class CharacterValues : MonoBehaviour
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
-   
+    private void Update()
+    {
+        time = time -= Time.deltaTime;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && _actualState != _state.star && !_isInvulnerable)
