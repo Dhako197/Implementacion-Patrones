@@ -26,10 +26,8 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         if (Input.GetButtonDown("Jump") && !_onAir)
-        {
-            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
-            _onAir = true;          
-        }
+            Jump();
+        
             
 
         if (Input.GetButtonUp("Jump") && _rigidbody2D.velocity.y > 0)
@@ -59,5 +57,11 @@ public class CharacterMovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+
+    public void Jump()
+    {
+        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
+        _onAir = true;
     }
 }

@@ -66,6 +66,7 @@ public class CharacterValues : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.CompareTag("Enemy") && _actualState != _state.star && !_isInvulnerable)
             TakeDamage();
     }
@@ -107,5 +108,10 @@ public class CharacterValues : MonoBehaviour
     private void BackToVulnerable()
     {
         _isInvulnerable = false;
+    }
+
+    public void GetPoints(float _pointsValue)
+    {
+        _points += _pointsValue;
     }
 }
