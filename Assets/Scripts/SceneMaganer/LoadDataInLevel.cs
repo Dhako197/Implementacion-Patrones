@@ -6,7 +6,7 @@ public class LoadDataInLevel : MonoBehaviour
 {
     private void Start()
     {
-        CharacterValues.Instance.Points = Repository.Instance.LoadPoints();
-        CharacterValues.Instance.Coins = Repository.Instance.LoadCoins();
+        CharacterValues.Instance.Points = Repository.Instance.Points;
+        CharacterValues.Instance.Coins = Repository.Instance.Coins;
     }
 }

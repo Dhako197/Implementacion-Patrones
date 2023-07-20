@@ -11,7 +11,7 @@ public class UpdateUI : MonoBehaviour
     [SerializeField] private TMP_Text _textMeshCoins;
     [SerializeField] private TMP_Text _textMeshTime;
 
-    private void Start()
+    private void Awake()
     {
         _characterValues.OnPointsChanged += UpdatePointsUI;
         _characterValues.OnCoinsChanged += UpdateCoinsUI;

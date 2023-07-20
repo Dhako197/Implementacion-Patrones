@@ -8,11 +8,12 @@ public class Repository : MonoBehaviour
     private float _points;
 
     public static Repository Instance { get; private set; }
-
+    public float Coins { get => _coins; }
+    public float Points { get => _points;}
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
 
         if (Instance != null && Instance != this)
             Destroy(this);
@@ -25,15 +26,4 @@ public class Repository : MonoBehaviour
         _coins = coins;
         _points = points;
     }
-
-    public float LoadCoins()
-    {
-       return _coins;
-    }
-    public float LoadPoints()
-    {
-        return _points;
-    }
-
-
 }
