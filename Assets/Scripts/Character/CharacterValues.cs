@@ -52,6 +52,15 @@ public class CharacterValues : MonoBehaviour
     public float Lives { get => _lives; set => _lives = value; }
     
   
+    public static CharacterValues Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+            Destroy(this);
+        else
+            Instance = this;
+    }
 
     private void Start()
     {
@@ -64,33 +73,30 @@ public class CharacterValues : MonoBehaviour
         time = time -= Time.deltaTime;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void TakeDamage()
     {
-
-        if (collision.gameObject.CompareTag("Enemy") && _actualState != _state.star && !_isInvulnerable)
-            TakeDamage();
-    }
-
-    private void TakeDamage()
-    {
-        switch (_actualState)
+        if (_actualState != _state.star && !_isInvulnerable)
         {
-            case _state.little:
-                Restart();
-                break;
+            switch (_actualState)
+            {
+                case _state.little:
+                    Restart();
+                    break;
 
-            case _state.medium:
-                _actualState = _state.little;
-                gameObject.transform.localScale = new Vector3(1, 1, 1);
-                break;
+                case _state.medium:
+                    _actualState = _state.little;
+                    gameObject.transform.localScale = new Vector3(1, 1, 1);
+                    Invulnerable();
+                    break;
 
-            case _state.fire:
-                _actualState = _state.medium;
-                _spriteRenderer.color = new Color(255f, 255f, 255f);
-                break;
-             
-        }
-      
+                case _state.fire:
+                    _actualState = _state.medium;
+                    _spriteRenderer.color = new Color(255f, 255f, 255f);
+                    Invulnerable();
+                    break;
+
+            }
+        }               
     }
 
     
@@ -99,7 +105,7 @@ public class CharacterValues : MonoBehaviour
         _checkPointManager.CharacterRespawn();
     }
 
-    private void Invulnerable()
+    public void Invulnerable()
     {
         _isInvulnerable = true;
         Invoke("BackToVulnerable", 0.5f);
