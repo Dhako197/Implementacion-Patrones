@@ -7,7 +7,9 @@ TagManager:
   - Ground
   - Enemy
   - Obstacle
-  - Enemy Head
+  - Weak Point
+  - Feet
+  - Turtle
   layers:
   - Default
   - TransparentFX
